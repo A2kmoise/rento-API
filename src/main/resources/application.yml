@@ -1,8 +1,11 @@
 spring:
   application:
     name: rentify
+  docker:
+    compose:
+      enabled: false
   datasource:
-    url: jdbc://posgresql://localhost:5432/rentify_db
+    url: jdbc:postgresql://localhost:5432/rentify_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -12,6 +15,5 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
