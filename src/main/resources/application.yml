@@ -17,3 +17,10 @@ spring:
       hibernate:
         format_sql: true
     open-in-view: false
+
+server:
+  port: 8080
+
+jwt:
+  secret: rentify-super-secret-key-for-jwt-token-generation-minimum-256-bits-required
+  expiration: 86400000  # 24 hours in milliseconds

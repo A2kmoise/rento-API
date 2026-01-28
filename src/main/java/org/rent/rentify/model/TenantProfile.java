@@ -1,12 +1,18 @@
 package org.rent.rentify.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.rent.rentify.enums.ReputationStatus;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "tenant_profiles")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TenantProfile {
 
     @Id
@@ -26,5 +32,5 @@ public class TenantProfile {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ReputationStatus status;
+    private ReputationStatus status = ReputationStatus.GOOD;
 }
