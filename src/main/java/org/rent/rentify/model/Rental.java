@@ -29,12 +29,6 @@ public class Rental {
     private Property property;
 
     @Column(nullable = false)
-    private Double rentAmount;
-
-    @Column(nullable = false)
-    private Integer dueDay; // Day of month when rent is due
-
-    @Column(nullable = false)
     private LocalDateTime startDate;
 
     @Column
