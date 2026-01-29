@@ -112,8 +112,6 @@ public class OwnerService {
         Rental rental = new Rental();
         rental.setTenant(tenant);
         rental.setProperty(property);
-        rental.setRentAmount(property.getRentAmount());
-        rental.setDueDay(property.getDueDay());
         rental.setStartDate(LocalDateTime.now());
         rental.setActive(true);
 
