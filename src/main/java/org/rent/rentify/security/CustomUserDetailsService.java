@@ -1,5 +1,6 @@
 package org.rent.rentify.security;
 
+import org.jspecify.annotations.NonNull;
 import org.rent.rentify.model.User;
 import org.rent.rentify.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String telephone) throws UsernameNotFoundException {
+    public @NonNull UserDetails loadUserByUsername(@NonNull String telephone) throws UsernameNotFoundException {
         User user = userRepository.findByTelephone(telephone)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with telephone: " + telephone));
 
