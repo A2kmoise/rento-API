@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/owner")
+@RequestMapping("/api/v1/owner")
 public class OwnerController {
 
     private final OwnerService ownerService;
