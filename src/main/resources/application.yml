@@ -24,3 +24,8 @@ server:
 jwt:
   secret: rentify-super-secret-key-for-jwt-token-generation-minimum-256-bits-required
   expiration: 86400000  # 24 hours in milliseconds
+
+twilio:
+  account-sid: "sdfghjkxcvbnmdfghjkxcvbncvbnvbn"
+  auth-token: "dcfvgbnm,.xcvbnxcvbnmcvbnmcvbn"
+  phone-number: "+wsxdcvbnjkm"

@@ -42,4 +42,17 @@ public class Rental {
 
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private List<Payment> payments = new ArrayList<>();
+
+    public UUID getId() { return id; }
+    public User getTenant() { return tenant; }
+    public Property getProperty() { return property; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
+    public Boolean getActive() { return active; }
+    
+    public void setTenant(User tenant) { this.tenant = tenant; }
+    public void setProperty(Property property) { this.property = property; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
+    public void setActive(Boolean active) { this.active = active; }
 }

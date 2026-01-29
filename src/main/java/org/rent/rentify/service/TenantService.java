@@ -1,15 +1,18 @@
 package org.rent.rentify.service;
 
-import org.rent.rentify.dto.PaymentDTO;
-import org.rent.rentify.dto.PropertyListDTO;
-import org.rent.rentify.dto.RentalDTO;
+import org.rent.rentify.dto.*;
 import org.rent.rentify.enums.PropertyStatus;
-import org.rent.rentify.model.*;
+import org.rent.rentify.model.Notification;
+import org.rent.rentify.model.Payment;
+import org.rent.rentify.model.Property;
+import org.rent.rentify.model.Rental;
+import org.rent.rentify.model.User;
 import org.rent.rentify.repository.NotificationRepository;
 import org.rent.rentify.repository.PaymentRepository;
 import org.rent.rentify.repository.PropertyRepository;
 import org.rent.rentify.repository.RentalRepository;
 import org.rent.rentify.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,15 +27,27 @@ public class TenantService {
     private final RentalRepository rentalRepository;
     private final PaymentRepository paymentRepository;
     private final NotificationRepository notificationRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public TenantService(UserRepository userRepository, PropertyRepository propertyRepository,
                          RentalRepository rentalRepository, PaymentRepository paymentRepository,
-                         NotificationRepository notificationRepository) {
+                         NotificationRepository notificationRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
         this.rentalRepository = rentalRepository;
         this.paymentRepository = paymentRepository;
         this.notificationRepository = notificationRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public User updateProfile(UUID userId, UpdateProfileRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (request.getFullName() != null) user.setFullName(request.getFullName());
+        if (request.getPassword() != null) user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        return userRepository.save(user);
     }
 
     public List<PropertyListDTO> getAvailableProperties() {

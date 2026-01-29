@@ -1,9 +1,8 @@
 package org.rent.rentify.controller;
 
-import org.rent.rentify.dto.PaymentDTO;
-import org.rent.rentify.dto.PropertyListDTO;
-import org.rent.rentify.dto.RentalDTO;
+import org.rent.rentify.dto.*;
 import org.rent.rentify.model.Notification;
+import org.rent.rentify.model.User;
 import org.rent.rentify.security.JwtUtil;
 import org.rent.rentify.service.TenantService;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +62,19 @@ MARK AS READ
     public ResponseEntity<String> markNotificationAsRead(@PathVariable UUID id) {
         tenantService.markNotificationAsRead(id);
         return ResponseEntity.ok("Notification marked as read");
+    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<User> updateProfile(
+            @RequestHeader("Authorization") String token,
+            @RequestBody UpdateProfileRequest request) {
+        UUID tenantId = extractUserIdFromToken(token);
+        return ResponseEntity.ok(tenantService.updateProfile(tenantId, request));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        return ResponseEntity.ok("Logged out successfully");
     }
 
     private UUID extractUserIdFromToken(String authHeader) {

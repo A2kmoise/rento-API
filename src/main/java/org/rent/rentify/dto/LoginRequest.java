@@ -6,12 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class LoginRequest {
     @NotBlank(message = "Telephone is required")
     private String telephone;
 
     @NotBlank(message = "Password is required")
     private String password;
+
+    public LoginRequest(String telephone, String password) {
+        this.telephone = telephone;
+        this.password = password;
+    }
+
+    public String getTelephone() { return telephone; }
+    public String getPassword() { return password; }
 }

@@ -20,4 +20,22 @@ public class PaymentDTO {
     private LocalDateTime paidDate;
     private String ownerName;
     private String tenantName;
+
+    public void setPaymentId(UUID paymentId) { this.paymentId = paymentId; }
+    public void setRentalId(UUID rentalId) { this.rentalId = rentalId; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    public void setStatus(PaymentStatus status) { this.status = status; }
+    public void setPaidDate(LocalDateTime paidDate) { this.paidDate = paidDate; }
+    public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
+    public void setTenantName(String tenantName) { this.tenantName = tenantName; }
+
+    public UUID getPaymentId() { return paymentId; }
+    public UUID getRentalId() { return rentalId; }
+    public Double getAmount() { return amount; }
+    public String getPaymentMethod() { return paymentMethod; }
+    public PaymentStatus getStatus() { return status; }
+    public LocalDateTime getPaidDate() { return paidDate; }
+    public String getOwnerName() { return ownerName; }
+    public String getTenantName() { return tenantName; }
 }

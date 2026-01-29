@@ -49,4 +49,17 @@ public class User {
 
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
     private List<Rental> rentals = new ArrayList<>();
+
+    public UUID getId() { return id; }
+    public String getFullName() { return fullName; }
+    public String getTelephone() { return telephone; }
+    public String getPassword() { return password; }
+    public UserRoles getRole() { return role; }
+    public Boolean getPhoneVerified() { return phoneVerified; }
+    
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setPassword(String password) { this.password = password; }
+    public void setPhoneVerified(Boolean phoneVerified) { this.phoneVerified = phoneVerified; }
+    public void setTelephone(String telephone) { this.telephone = telephone; }
+    public void setRole(UserRoles role) { this.role = role; }
 }

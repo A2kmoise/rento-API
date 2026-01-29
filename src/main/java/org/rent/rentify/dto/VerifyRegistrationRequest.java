@@ -2,13 +2,11 @@ package org.rent.rentify.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.rent.rentify.enums.UserRoles;
 
 @Data
-public class RegisterRequest {
+public class VerifyRegistrationRequest {
     @NotBlank(message = "Full name is required")
     private String fullName;
 
@@ -21,15 +19,12 @@ public class RegisterRequest {
     @NotNull(message = "Role is required")
     private UserRoles role;
 
-    public RegisterRequest(String fullName, String telephone, String password, UserRoles role) {
-        this.fullName = fullName;
-        this.telephone = telephone;
-        this.password = password;
-        this.role = role;
-    }
-
+    @NotBlank(message = "OTP code is required")
+    private String otp;
+    
     public String getFullName() { return fullName; }
     public String getTelephone() { return telephone; }
     public String getPassword() { return password; }
     public UserRoles getRole() { return role; }
+    public String getOtp() { return otp; }
 }

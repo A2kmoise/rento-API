@@ -43,4 +43,20 @@ public class Payment {
 
     @Column(nullable = false)
     private LocalDateTime paidDate = LocalDateTime.now();
+
+    public UUID getId() { return id; }
+    public Rental getRental() { return rental; }
+    public User getTenant() { return tenant; }
+    public User getOwner() { return owner; }
+    public Double getAmount() { return amount; }
+    public String getPaymentMethod() { return paymentMethod; }
+    public org.rent.rentify.enums.PaymentStatus getStatus() { return status; }
+    public LocalDateTime getPaidDate() { return paidDate; }
+    
+    public void setRental(Rental rental) { this.rental = rental; }
+    public void setTenant(User tenant) { this.tenant = tenant; }
+    public void setOwner(User owner) { this.owner = owner; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+    public void setStatus(org.rent.rentify.enums.PaymentStatus status) { this.status = status; }
 }

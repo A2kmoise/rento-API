@@ -16,4 +16,7 @@ public class AssignTenantRequest {
 
     @NotNull(message = "Tenant ID is required")
     private UUID tenantId;
+
+    public UUID getPropertyId() { return propertyId; }
+    public UUID getTenantId() { return tenantId; }
 }

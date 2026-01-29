@@ -16,4 +16,15 @@ public class PropertyListDTO {
     private PropertyStatus status;
     private String ownerName;
     private String ownerTelephone;
+
+    public void setPropertyId(UUID propertyId) { this.propertyId = propertyId; }
+    public void setDescription(String description) { this.description = description; }
+    public void setLocation(String location) { this.location = location; }
+    public void setRentAmount(Double rentAmount) { this.rentAmount = rentAmount; }
+    public void setDueDay(Integer dueDay) { this.dueDay = dueDay; }
+    public void setBedrooms(Integer bedrooms) { this.bedrooms = bedrooms; }
+    public void setBathrooms(Integer bathrooms) { this.bathrooms = bathrooms; }
+    public void setStatus(PropertyStatus status) { this.status = status; }
+    public void setOwnerName(String ownerName) { this.ownerName = ownerName; }
+    public void setOwnerTelephone(String ownerTelephone) { this.ownerTelephone = ownerTelephone; }
 }

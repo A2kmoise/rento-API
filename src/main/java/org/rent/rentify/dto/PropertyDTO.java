@@ -31,4 +31,12 @@ public class PropertyDTO {
 
     @NotNull(message = "Status is required")
     private PropertyStatus status;
+
+    public String getDescription() { return description; }
+    public String getLocation() { return location; }
+    public Double getRentAmount() { return rentAmount; }
+    public Integer getDueDay() { return dueDay; }
+    public Integer getBedrooms() { return bedrooms; }
+    public Integer getBathrooms() { return bathrooms; }
+    public PropertyStatus getStatus() { return status; }
 }

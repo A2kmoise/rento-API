@@ -33,4 +33,15 @@ public class Notification {
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public UUID getId() { return id; }
+    public User getUser() { return user; }
+    public String getMessage() { return message; }
+    public String getType() { return type; }
+    public Boolean getIsRead() { return isRead; }
+    
+    public void setUser(User user) { this.user = user; }
+    public void setMessage(String message) { this.message = message; }
+    public void setType(String type) { this.type = type; }
+    public void setIsRead(Boolean isRead) { this.isRead = isRead; }
 }

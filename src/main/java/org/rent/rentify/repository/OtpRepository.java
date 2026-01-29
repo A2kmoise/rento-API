@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface OtpRepository extends JpaRepository<Otp, UUID> {
     Optional<Otp> findByTelephoneAndVerifiedFalseOrderByCreatedAtDesc(String telephone);
+
 }

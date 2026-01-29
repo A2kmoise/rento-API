@@ -32,4 +32,15 @@ public class Otp {
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    public UUID getId() { return id; }
+    public String getTelephone() { return telephone; }
+    public String getCode() { return code; }
+    public LocalDateTime getExpiresAt() { return expiresAt; }
+    public Boolean getVerified() { return verified; }
+    
+    public void setTelephone(String telephone) { this.telephone = telephone; }
+    public void setCode(String code) { this.code = code; }
+    public void setExpiresAt(LocalDateTime expiresAt) { this.expiresAt = expiresAt; }
+    public void setVerified(Boolean verified) { this.verified = verified; }
 }

@@ -33,4 +33,8 @@ public class TenantProfile {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ReputationStatus status = ReputationStatus.GOOD;
+
+    public User getUser() { return user; }
+    public ReputationStatus getStatus() { return status; }
+    public void setStatus(ReputationStatus status) { this.status = status; }
 }

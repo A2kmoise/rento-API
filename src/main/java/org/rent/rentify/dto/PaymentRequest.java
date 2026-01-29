@@ -22,4 +22,8 @@ public class PaymentRequest {
 
     @NotBlank(message = "Payment method is required")
     private String paymentMethod; // "CASH", "MOBILE_MONEY", "BANK_TRANSFER"
+
+    public UUID getRentalId() { return rentalId; }
+    public Double getAmount() { return amount; }
+    public String getPaymentMethod() { return paymentMethod; }
 }

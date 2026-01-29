@@ -1,9 +1,7 @@
 package org.rent.rentify.controller;
 
 import jakarta.validation.Valid;
-import org.rent.rentify.dto.AssignTenantRequest;
-import org.rent.rentify.dto.PaymentDTO;
-import org.rent.rentify.dto.PropertyDTO;
+import org.rent.rentify.dto.*;
 import org.rent.rentify.model.Property;
 import org.rent.rentify.model.Rental;
 import org.rent.rentify.model.User;
@@ -95,6 +93,26 @@ GET PAYMENT HISTORY  FROM HIS TENANTS
     public ResponseEntity<List<PaymentDTO>> getPaymentHistory(@RequestHeader("Authorization") String token) {
         UUID ownerId = extractUserIdFromToken(token);
         return ResponseEntity.ok(ownerService.getPaymentHistory(ownerId));
+    }
+
+    @GetMapping("/search-tenant")
+    public ResponseEntity<TenantSearchDTO> searchTenant(@RequestParam String phone) {
+        return ResponseEntity.ok(ownerService.searchTenantByPhone(phone));
+    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<User> updateProfile(
+            @RequestHeader("Authorization") String token,
+            @RequestBody UpdateProfileRequest request) {
+        UUID ownerId = extractUserIdFromToken(token);
+        return ResponseEntity.ok(ownerService.updateProfile(ownerId, request));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout() {
+        // In JWT, logout is primarily handled on client side by removing token.
+        // Server-side could implement token blacklisting if needed.
+        return ResponseEntity.ok("Logged out successfully");
     }
 
     private UUID extractUserIdFromToken(String authHeader) {

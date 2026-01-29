@@ -1,16 +1,16 @@
 package org.rent.rentify.service;
 
-import org.rent.rentify.dto.AssignTenantRequest;
-import org.rent.rentify.dto.PaymentDTO;
-import org.rent.rentify.dto.PropertyDTO;
+import org.rent.rentify.dto.*;
 import org.rent.rentify.enums.UserRoles;
 import org.rent.rentify.model.*;
 import org.rent.rentify.repository.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -22,15 +22,30 @@ public class OwnerService {
     private final RentalRepository rentalRepository;
     private final PaymentRepository paymentRepository;
     private final NotificationRepository notificationRepository;
+    private final TenantRepository tenantRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public OwnerService(UserRepository userRepository, PropertyRepository propertyRepository,
                         RentalRepository rentalRepository, PaymentRepository paymentRepository,
-                        NotificationRepository notificationRepository) {
+                        NotificationRepository notificationRepository, TenantRepository tenantRepository,
+                        PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.propertyRepository = propertyRepository;
         this.rentalRepository = rentalRepository;
         this.paymentRepository = paymentRepository;
         this.notificationRepository = notificationRepository;
+        this.tenantRepository = tenantRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public User updateProfile(UUID userId, UpdateProfileRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        if (request.getFullName() != null) user.setFullName(request.getFullName());
+        if (request.getPassword() != null) user.setPassword(passwordEncoder.encode(request.getPassword()));
+        
+        return userRepository.save(user);
     }
 
     public Property addProperty(UUID ownerId, PropertyDTO dto) {
@@ -146,6 +161,24 @@ public class OwnerService {
         List<Payment> payments = paymentRepository.findByOwnerOrderByPaidDateDesc(owner);
 
         return payments.stream().map(this::convertToPaymentDTO).collect(Collectors.toList());
+    }
+
+    public TenantSearchDTO searchTenantByPhone(String phone) {
+        TenantProfile profile = tenantRepository.findByUser_Telephone(phone)
+                .orElseThrow(() -> new RuntimeException("Tenant not found"));
+
+        TenantSearchDTO dto = new TenantSearchDTO();
+        dto.setName(profile.getUser().getFullName());
+        dto.setPhone(profile.getUser().getTelephone());
+        dto.setReputationStatus(profile.getStatus());
+
+        // Get most recent rental location
+        Optional<Rental> recentRental = rentalRepository.findByTenantAndActiveTrue(profile.getUser())
+                .stream().findFirst();
+        
+        dto.setRecentRentalLocation(recentRental.map(r -> r.getProperty().getLocation()).orElse("N/A"));
+
+        return dto;
     }
 
     private PaymentDTO convertToPaymentDTO(Payment payment) {
