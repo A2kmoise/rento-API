@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/tenant")
+@RequestMapping("/api/v1/tenant")
 public class TenantController {
 
     private final TenantService tenantService;
