@@ -17,23 +17,31 @@ public class AuthController {
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
-
+    /*
+    USER REGISTERING (OWNER AND TENANT)
+     */
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
-
+    /*
+      USER LOGIN (OWNER AND TENANT)
+     */
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
-
+    /*
+    SIGNUP OTP
+     */
     @PostMapping("/send-otp")
     public ResponseEntity<String> sendOtp(@RequestParam String telephone) {
         authService.sendOtp(telephone);
         return ResponseEntity.ok("OTP sent successfully (simulated)");
     }
-
+    /*
+    OTP VERIFICATION
+     */
     @PostMapping("/verify-otp")
     public ResponseEntity<String> verifyOtp(@RequestParam String telephone, @RequestParam String code) {
         authService.verifyOtp(telephone, code);

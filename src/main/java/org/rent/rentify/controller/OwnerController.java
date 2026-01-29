@@ -26,7 +26,9 @@ public class OwnerController {
         this.ownerService = ownerService;
         this.jwtUtil = jwtUtil;
     }
-
+ /*
+ CREATING A NEW PROPERTY
+  */
     @PostMapping("/properties")
     public ResponseEntity<Property> addProperty(
             @RequestHeader("Authorization") String token,
@@ -35,6 +37,9 @@ public class OwnerController {
         return ResponseEntity.ok(ownerService.addProperty(ownerId, dto));
     }
 
+    /*
+    UPDATING THE PROPERTY
+     */
     @PutMapping("/properties/{id}")
     public ResponseEntity<Property> updateProperty(
             @RequestHeader("Authorization") String token,
@@ -43,6 +48,9 @@ public class OwnerController {
         UUID ownerId = extractUserIdFromToken(token);
         return ResponseEntity.ok(ownerService.updateProperty(ownerId, id, dto));
     }
+/*
+DELETING A PROPERTY AND DB CASCADE
+ */
 
     @DeleteMapping("/properties/{id}")
     public ResponseEntity<String> deleteProperty(
@@ -53,12 +61,17 @@ public class OwnerController {
         return ResponseEntity.ok("Property deleted successfully");
     }
 
+    /*
+    OWNER GET PROPERTIES
+     */
     @GetMapping("/properties")
     public ResponseEntity<List<Property>> getMyProperties(@RequestHeader("Authorization") String token) {
         UUID ownerId = extractUserIdFromToken(token);
         return ResponseEntity.ok(ownerService.getMyProperties(ownerId));
     }
-
+/*
+ASSIGNING TENANT YOUR PROPERTY
+ */
     @PostMapping("/assign-tenant")
     public ResponseEntity<Rental> assignTenant(
             @RequestHeader("Authorization") String token,
@@ -67,12 +80,17 @@ public class OwnerController {
         return ResponseEntity.ok(ownerService.assignTenant(ownerId, request));
     }
 
+    /*
+    OWNER GET HIS TENANTS
+     */
     @GetMapping("/tenants")
     public ResponseEntity<List<User>> getMyTenants(@RequestHeader("Authorization") String token) {
         UUID ownerId = extractUserIdFromToken(token);
         return ResponseEntity.ok(ownerService.getMyTenants(ownerId));
     }
-
+/*
+GET PAYMENT HISTORY  FROM HIS TENANTS
+ */
     @GetMapping("/payments")
     public ResponseEntity<List<PaymentDTO>> getPaymentHistory(@RequestHeader("Authorization") String token) {
         UUID ownerId = extractUserIdFromToken(token);
