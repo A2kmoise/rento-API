@@ -22,25 +22,34 @@ public class TenantController {
         this.tenantService = tenantService;
         this.jwtUtil = jwtUtil;
     }
-
+/*
+GET ALL RENTALS
+ */
     @GetMapping("/rentals")
     public ResponseEntity<List<RentalDTO>> getMyRentals(@RequestHeader("Authorization") String token) {
         UUID tenantId = extractUserIdFromToken(token);
         return ResponseEntity.ok(tenantService.getMyRentals(tenantId));
     }
-
+/*
+GET OWNERS PAYMENT HISTORY
+ */
     @GetMapping("/payments")
     public ResponseEntity<List<PaymentDTO>> getPaymentHistory(@RequestHeader("Authorization") String token) {
         UUID tenantId = extractUserIdFromToken(token);
         return ResponseEntity.ok(tenantService.getMyPaymentHistory(tenantId));
     }
 
+    /*
+    GET MTY NOTIFICATIONS
+     */
     @GetMapping("/notifications")
     public ResponseEntity<List<Notification>> getNotifications(@RequestHeader("Authorization") String token) {
         UUID tenantId = extractUserIdFromToken(token);
         return ResponseEntity.ok(tenantService.getMyNotifications(tenantId));
     }
-
+/*
+MARK AS READ
+ */
     @PutMapping("/notifications/{id}/read")
     public ResponseEntity<String> markNotificationAsRead(@PathVariable UUID id) {
         tenantService.markNotificationAsRead(id);

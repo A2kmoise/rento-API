@@ -16,7 +16,9 @@ public class PaymentController {
     public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
     }
-
+/*
+PAYMENT
+ */
     @PostMapping("/simulate")
     public ResponseEntity<Payment> simulatePayment(@Valid @RequestBody PaymentRequest request) {
         return ResponseEntity.ok(paymentService.simulatePayment(request));
