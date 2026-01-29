@@ -1,6 +1,7 @@
 package org.rent.rentify.controller;
 
 import org.rent.rentify.dto.PaymentDTO;
+import org.rent.rentify.dto.PropertyListDTO;
 import org.rent.rentify.dto.RentalDTO;
 import org.rent.rentify.model.Notification;
 import org.rent.rentify.security.JwtUtil;
@@ -23,9 +24,17 @@ public class TenantController {
         this.jwtUtil = jwtUtil;
     }
 /*
-GET ALL RENTALS
+GET AVAILABLE PROPERTIES (for browsing)
  */
-    @GetMapping("/rentals")
+    @GetMapping("/properties")
+    public ResponseEntity<List<PropertyListDTO>> getAvailableProperties() {
+        return ResponseEntity.ok(tenantService.getAvailableProperties());
+    }
+
+/*
+GET MY ACTIVE RENTALS
+ */
+    @GetMapping("/my-rentals")
     public ResponseEntity<List<RentalDTO>> getMyRentals(@RequestHeader("Authorization") String token) {
         UUID tenantId = extractUserIdFromToken(token);
         return ResponseEntity.ok(tenantService.getMyRentals(tenantId));
