@@ -26,6 +26,6 @@ jwt:
   expiration: 86400000  # 24 hours in milliseconds
 
 twilio:
-  account-sid: "sdfghjkxcvbnmdfghjkxcvbncvbnvbn"
-  auth-token: "dcfvgbnm,.xcvbnxcvbnmcvbnmcvbn"
-  phone-number: "+wsxdcvbnjkm"
+  account-sid: "###############################"
+  auth-token: "###############################"
+  phone-number: "###############"
