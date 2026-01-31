@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
     public User totalUsers(){
-        return();
+        return UserRepository.save();
     }
 }
