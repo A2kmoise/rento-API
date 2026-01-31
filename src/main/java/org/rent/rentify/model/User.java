@@ -1,5 +1,6 @@
 package org.rent.rentify.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,9 +46,11 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Property> properties = new ArrayList<>();
 
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Rental> rentals = new ArrayList<>();
 
     public UUID getId() { return id; }
