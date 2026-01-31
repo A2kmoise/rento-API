@@ -130,6 +130,7 @@ public class OwnerService {
         rental.setStartDate(LocalDateTime.now());
         rental.setActive(true);
         rental.setDueDay(property.getDueDay());
+        rental.setRentAmount(property.getRentAmount());
 
         Rental savedRental = rentalRepository.save(rental);
 
