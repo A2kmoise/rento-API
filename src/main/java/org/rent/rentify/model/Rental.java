@@ -43,6 +43,9 @@ public class Rental {
     @Column(nullable = false)
     private Integer dueDay;
 
+    @Column(nullable = false)
+    private Double rentAmount;
+
     @OneToMany(mappedBy = "rental", cascade = CascadeType.ALL)
     private List<Payment> payments = new ArrayList<>();
 
@@ -53,6 +56,7 @@ public class Rental {
     public LocalDateTime getEndDate() { return endDate; }
     public Boolean getActive() { return active; }
     public Integer getDueDay() { return dueDay; }
+    public Double getRentAmount() { return rentAmount; }
     
     public void setTenant(User tenant) { this.tenant = tenant; }
     public void setProperty(Property property) { this.property = property; }
@@ -60,4 +64,5 @@ public class Rental {
     public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setActive(Boolean active) { this.active = active; }
     public void setDueDay(Integer dueDay) { this.dueDay = dueDay; }
+    public void setRentAmount(Double rentAmount) { this.rentAmount = rentAmount; }
 }
