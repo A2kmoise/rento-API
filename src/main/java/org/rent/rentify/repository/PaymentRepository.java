@@ -1,5 +1,6 @@
 package org.rent.rentify.repository;
 
+import org.rent.rentify.enums.PaymentStatus;
 import org.rent.rentify.model.Payment;
 import org.rent.rentify.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,5 @@ import java.util.UUID;
 public interface PaymentRepository extends JpaRepository<Payment, UUID> {
     List<Payment> findByTenantOrderByPaidDateDesc(User tenant);
     List<Payment> findByOwnerOrderByPaidDateDesc(User owner);
+    long countByStatus(PaymentStatus status);
 }
